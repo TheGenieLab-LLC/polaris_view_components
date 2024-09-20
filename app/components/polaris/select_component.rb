@@ -77,7 +77,7 @@ module Polaris
       @input_options[:disabled] = disabled
       @input_options[:data] ||= {}
       prepend_option(@input_options[:data], :polaris_select_target, "select")
-      prepend_option(@input_options[:data], :action, "polaris-select#update")
+      prepend_option(@input_options[:data], :action, "turbo:load@window->polaris-select#update")
     end
 
     def hides_label?
