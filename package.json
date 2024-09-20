@@ -1,0 +1,46 @@
+{
+  "name": "polaris-view-components",
+  "version": "2.2.2",
+  "description": "ViewComponents for Polaris Design System",
+  "main": "app/assets/javascripts/polaris_view_components.js",
+  "module": "app/assets/javascripts/polaris_view_components/index.js",
+  "repository": "git@github.com:baoagency/polaris_view_components.git",
+  "author": "By Association Only",
+  "contributors": [
+    "Dan Gamble <dan@dangamble.co.uk>",
+    "Kirill Platonov <mail@kirillplatonov.com>"
+  ],
+  "files": [
+    "app/javascript/polaris/*.js",
+    "src/*.js"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@hotwired/stimulus": "^3.0.0",
+    "@rails/request.js": ">= 0.0.6"
+  },
+  "scripts": {
+    "build": "rollup --config rollup.config.js",
+    "build:css": "postcss ./app/assets/stylesheets/polaris_view_components.pcss -o ./app/assets/stylesheets/polaris_view_components.css",
+    "prerelease": "yarn build && yarn build:css && git --no-pager diff && echo && npm pack --dry-run && echo && read -n 1 -p \"Look OK? Press any key to publish and commit v$npm_package_version\" && echo",
+    "release": "npm publish"
+  },
+  "devDependencies": {
+    "@floating-ui/dom": "^1.5.3",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@shopify/polaris": "^11.26.0",
+    "postcss": "^8.4.35",
+    "postcss-cli": "^10.1.0",
+    "postcss-import": "^15.1.0",
+    "postcss-nested": "^6.0.1",
+    "rollup": "^2.79.1",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@rails/request.js": "^0.0.9"
+  }
+}

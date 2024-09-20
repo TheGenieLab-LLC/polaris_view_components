@@ -1,0 +1,22 @@
+.NavigationList {
+  padding-top: var(--p-space-3);
+  padding-bottom: var(--p-space-3);
+
+  ul {
+    margin: 0;
+    padding-inline-start: 0;
+  }
+
+  .Polaris-Navigation__Item {
+    padding-bottom: var(--p-space-05);
+    padding-top: var(--p-space-05);
+
+    &.Polaris-Navigation__Item--selected {
+      background-color: var(--p-color-bg-surface-tertiary-hover);
+    }
+
+    &:hover {
+      background-color: var(--p-color-bg-surface-tertiary);
+    }
+  }
+}
