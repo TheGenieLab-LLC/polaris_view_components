@@ -7,16 +7,19 @@ export default class extends Controller {
   static values = { multiple: Boolean, url: String, selected: Array }
 
   connect() {
+    console.log("AC connect")
     this.inputTarget.addEventListener("input", this.onInputChange)
   }
 
   disconnect() {
+    console.log("AC disconnect")
     this.inputTarget.removeEventListener("input", this.onInputChange)
   }
 
   // Actions
 
   toggle() {
+    console.log("AC toggle")
     if (this.isRemote && this.visibleOptions.length == 0 && this.value.length == 0) {
       this.fetchResults()
     } else {
@@ -25,6 +28,7 @@ export default class extends Controller {
   }
 
   select(event) {
+    console.log("AC select")
     const input = event.currentTarget
     const label = input.closest('li').dataset.label
     const changeEvent = new CustomEvent('polaris-autocomplete:change', {
@@ -42,6 +46,7 @@ export default class extends Controller {
   }
 
   onInputChange = debounce(() => {
+    console.log("AC onInputChange")
     if (this.isRemote) {
       this.fetchResults()
     } else {
@@ -50,6 +55,7 @@ export default class extends Controller {
   }, 200)
 
   reset() {
+    console.log("AC reset")
     this.inputTarget.value = ''
     this.optionTargets.forEach(option => {
       option.classList.add('Polaris--hidden')
@@ -60,24 +66,29 @@ export default class extends Controller {
   // Private
 
   get isRemote() {
+    console.log("AC isRemote")
     return this.urlValue.length > 0
   }
 
   get popoverController() {
+    console.log("AC popoverController")
     return this.application.getControllerForElementAndIdentifier(this.popoverTarget, 'polaris-popover')
   }
 
   get value() {
+    console.log("AC value")
     return this.inputTarget.value
   }
 
   get visibleOptions() {
+    console.log("AC visibleOptions")
     return [...this.optionTargets].filter(option => {
       return !option.classList.contains('Polaris--hidden')
     })
   }
 
   handleResults() {
+    console.log("AC handleResults")
     if (this.visibleOptions.length > 0) {
       this.hideEmptyState()
       this.popoverController.show()
@@ -90,6 +101,7 @@ export default class extends Controller {
   }
 
   filterOptions() {
+    console.log("AC filterOptions")
     if (this.value === '') {
       this.optionTargets.forEach(option => {
         option.classList.remove('Polaris--hidden')
@@ -108,6 +120,7 @@ export default class extends Controller {
   }
 
   async fetchResults() {
+    console.log("AC fetchResults")
     const response = await get(this.urlValue, {
       query: { q: this.value }
     })
@@ -119,6 +132,7 @@ export default class extends Controller {
   }
 
   showEmptyState() {
+    console.log("AC showEmptyState")
     if (this.hasEmptyStateTarget) {
       this.resultsTarget.classList.add('Polaris--hidden')
       this.emptyStateTarget.classList.remove('Polaris--hidden')
@@ -126,6 +140,7 @@ export default class extends Controller {
   }
 
   hideEmptyState() {
+    console.log("AC hideEmptyState")
     if (this.hasEmptyStateTarget) {
       this.emptyStateTarget.classList.add('Polaris--hidden')
       this.resultsTarget.classList.remove('Polaris--hidden')
@@ -133,6 +148,7 @@ export default class extends Controller {
   }
 
   checkSelected() {
+    console.log("AC checkSelected")
     this.visibleOptions.forEach(option => {
       const input = option.querySelector('input')
       if (!input) return
