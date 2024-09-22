@@ -108,11 +108,13 @@ export default class extends Controller {
   }
 
   async fetchResults() {
+    console.log("sending request in AC");
     const response = await get(this.urlValue, {
       headers: {
         "Accept" : "*/*"
       },
-      query: { q: this.value }
+      query: { q: this.value },
+      responseKind: 'json'
     })
     if (response.ok) {
       const results = await response.html
